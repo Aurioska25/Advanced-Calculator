@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Calculator</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .calculator {
+            max-width: 400px;
+            margin: 50px auto;
+        }
+        .btn {
+            margin: 5px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+        .btn-warning {
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+        .btn-warning:hover {
+            background-color: #e0a800;
+            border-color: #d39e00;
+        }
+        .btn-info {
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+        .btn-info:hover {
+            background-color: #138496;
+            border-color: #117a8b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container calculator">
+        <h2 class="text-center mb-4">Advanced Calculator</h2>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="result" placeholder="0" readonly>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary w-100" onclick="clearResult()">C</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-danger w-100" onclick="deleteLast()">CE</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-warning w-100" onclick="appendToResult('/')">/</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-warning w-100" onclick="appendToResult('*')">x</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-light w-100" onclick="appendToResult('7')">7</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-light w-100" onclick="appendToResult('8')">8</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-light w-100" onclick="appendToResult('9')">9</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-warning w-100" onclick="appendToResult('-')">-</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-light w-100" onclick="appendToResult('4')">4</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-light w-100" onclick="appendToResult('5')">5</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-light w-100" onclick="appendToResult('6')">6</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-warning w-100" onclick="appendToResult('+')">+</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-light w-100" onclick="appendToResult('1')">1</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-light w-100" onclick="appendToResult('2')">2</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-light w-100" onclick="appendToResult('3')">3</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-warning w-100" onclick="appendToResult('.')">.</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-light w-100" onclick="appendToResult('0')">0</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-warning w-100" onclick="calculate()">=</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-warning w-100" onclick="appendToResult('(')">(</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-warning w-100" onclick="appendToResult(')')">)</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-info w-100" onclick="appendToResult('Math.sin(')">sin</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-info w-100" onclick="appendToResult('Math.cos(')">cos</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-info w-100" onclick="appendToResult('Math.tan(')">tan</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-info w-100" onclick="appendToResult('Math.log(')">log</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-info w-100" onclick="appendToResult('Math.abs(')">|x|</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-info w-100" onclick="appendToResult('Math.pow(')">^</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-info w-100" onclick="appendToResult('Math.ceil(')">ceil</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-info w-100" onclick="appendToResult('Math.floor(')">floor</button>
+            </div>
+        </div>
+        <!-- Additional Mathematical Functions -->
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-info w-100" onclick="appendToResult('Math.acos(')">acos</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-info w-100" onclick="appendToResult('Math.acosh(')">acosh</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-info w-100" onclick="appendToResult('Math.asin(')">asin</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-info w-100" onclick="appendToResult('Math.asinh(')">asinh</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-info w-100" onclick="appendToResult('Math.atan(')">atan</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-info w-100" onclick="appendToResult('Math.atanh(')">atanh</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-info w-100" onclick="appendToResult('Math.cbrt(')">cbrt</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-info w-100" onclick="appendToResult('Math.exp(')">exp</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-info w-100" onclick="appendToResult('Math.expm1(')">expm1</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-info w-100" onclick="appendToResult('Math.log10(')">log10</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-info w-100" onclick="appendToResult('Math.log1p(')">log1p</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-info w-100" onclick="appendToResult('Math.log2(')">log2</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-info w-100" onclick="appendToResult('Math.sign(')">sign</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-info w-100" onclick="appendToResult('Math.sqrt(')">sqrt</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-info w-100" onclick="appendToResult('Math.trunc(')">trunc</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let result = document.getElementById('result');
+
+        function appendToResult(value) {
+            result.value += value;
+        }
+
+        function clearResult() {
+            result.value = '';
+        }
+
+        function deleteLast() {
+            result.value = result.value.slice(0, -1);
+        }
+
+        function calculate() {
+            let expression = result.value;
+            if (expression) {
+                try {
+                    let answer = eval(expression);
+                    result.value = answer;
+                } catch (error) {
+                    alert('Invalid Expression');
+                    result.value = '';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
